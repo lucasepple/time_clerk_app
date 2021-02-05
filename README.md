@@ -1,16 +1,3 @@
-# time_clerk_app
+# Time Clerk
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Time Clerk is a basic application to track your time. It was designed by Lucas Epple as part of an application process for the Bachelor's degree "Interaction Design" at the University of Applied Sciences Schwäbisch Gmünd. He then used the design for his first Flutter project.
