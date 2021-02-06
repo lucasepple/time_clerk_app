@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-import 'package:time_clerk_app/models/date.dart';
 import 'package:time_clerk_app/widgets/overview_chart.dart';
 import 'package:time_clerk_app/widgets/overview_list.dart';
 
@@ -12,14 +12,14 @@ class OverviewScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            Date().currentDay,
+            DateFormat('EEEE').format(DateTime.now()).toString(),
             style: Theme.of(ctx).textTheme.headline1,
           ),
           SizedBox(
             height: 1,
           ),
           Text(
-            Date().currentDateString,
+            DateFormat('MMMM d, y').format(DateTime.now()).toString(),
             style: Theme.of(ctx).textTheme.headline6,
           ),
         ],
@@ -32,9 +32,8 @@ class OverviewScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       body: SafeArea(
-        child: Container(
+        child: Padding(
           padding: const EdgeInsets.all(20),
-          width: double.infinity,
           child: Column(
             children: <Widget>[
               dateBuilder(context),
