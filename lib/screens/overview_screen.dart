@@ -7,6 +7,19 @@ import 'package:time_clerk_app/widgets/overview_list.dart';
 class OverviewScreen extends StatelessWidget {
   final String currentWeekday =
       DateFormat('EEEE').format(DateTime.now()).toString();
+  final String currentDay = DateFormat('d').format(DateTime.now()).toString();
+
+  String dayOfMonthWithSuffix(String day) {
+    if (day == '1' || day == '21' || day == '31') {
+      return '${day}st';
+    } else if (day == '2' || day == '22') {
+      return '${day}nd';
+    } else if (day == '3' || day == '23') {
+      return '${day}rd';
+    } else {
+      return '${day}th';
+    }
+  }
 
   Widget dateBuilder(BuildContext ctx) {
     return Container(
@@ -22,7 +35,7 @@ class OverviewScreen extends StatelessWidget {
             height: 1,
           ),
           Text(
-            DateFormat('MMMM d, y').format(DateTime.now()).toString(),
+            '${dayOfMonthWithSuffix(currentDay)} ${DateFormat('of MMMM y').format(DateTime.now()).toString()}',
             style: Theme.of(ctx).textTheme.headline6,
           ),
         ],
@@ -44,7 +57,10 @@ class OverviewScreen extends StatelessWidget {
                 height: 33,
               ),
               OverviewChart(currentWeekday),
-              OverviewList(),
+              SizedBox(
+                height: 33,
+              ),
+              OverviewList(currentWeekday),
             ],
           ),
         ),

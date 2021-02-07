@@ -46,6 +46,14 @@ class TimeTracker {
     Activity.socialMedia: Color(0xffa11006),
     Activity.other: Color(0xff9d9d9d),
   };
+  static const Map<Activity, String> activityStrings = {
+    Activity.sleep: 'Sleep',
+    Activity.work: 'Work',
+    Activity.leisure: 'Leisure',
+    Activity.sport: 'Sport',
+    Activity.socialMedia: 'Social Media',
+    Activity.other: 'Other',
+  };
 
   Map<Activity, Stopwatch> stopwatches = {
     Activity.sleep: Stopwatch(),

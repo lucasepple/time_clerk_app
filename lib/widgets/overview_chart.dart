@@ -53,8 +53,10 @@ class OverviewChart extends StatelessWidget {
                       width: 35,
                       height: 0.75,
                       color: heightFactor() *
-                                  timeLimits[currentWeekday][activity] >
-                              heightFactor() * trackedTime[activity].toDouble()
+                                  timeLimits[currentWeekday][activity] >=
+                              (heightFactor() *
+                                      trackedTime[activity].toDouble() -
+                                  0.75)
                           ? TimeTracker.activityColors[activity]
                           : Colors.white,
                     ),

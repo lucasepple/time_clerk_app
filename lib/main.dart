@@ -23,6 +23,13 @@ class TimeClerk extends StatelessWidget {
             fontSize: 20,
             color: Colors.black,
           ),
+          bodyText1: TextStyle(
+            fontSize: 17,
+          ),
+        ),
+        buttonTheme: ButtonThemeData(
+          height: 25,
+          minWidth: 75,
         ),
       ),
       home: OverviewScreen(),
