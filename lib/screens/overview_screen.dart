@@ -5,6 +5,9 @@ import 'package:time_clerk_app/widgets/overview_chart.dart';
 import 'package:time_clerk_app/widgets/overview_list.dart';
 
 class OverviewScreen extends StatelessWidget {
+  final String currentWeekday =
+      DateFormat('EEEE').format(DateTime.now()).toString();
+
   Widget dateBuilder(BuildContext ctx) {
     return Container(
       width: double.infinity,
@@ -12,7 +15,7 @@ class OverviewScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            DateFormat('EEEE').format(DateTime.now()).toString(),
+            currentWeekday,
             style: Theme.of(ctx).textTheme.headline1,
           ),
           SizedBox(
@@ -37,7 +40,10 @@ class OverviewScreen extends StatelessWidget {
           child: Column(
             children: <Widget>[
               dateBuilder(context),
-              OverviewChart(),
+              SizedBox(
+                height: 33,
+              ),
+              OverviewChart(currentWeekday),
               OverviewList(),
             ],
           ),

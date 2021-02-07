@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:cron/cron.dart';
 import 'package:intl/intl.dart';
@@ -17,7 +18,35 @@ class TimeTracker {
   String currentMonth;
   int currentDay;
   var currentActivity = Activity.other;
-  Map<Activity, int> trackedTime;
+
+  // cutom values for testing
+  Map<Activity, int> _trackedTime = {
+    Activity.sleep: 455,
+    Activity.work: 372,
+    Activity.leisure: 137,
+    Activity.sport: 10,
+    Activity.socialMedia: 78,
+    Activity.other: 144,
+  };
+
+  Map<String, Map<Activity, int>> _timeLimits = {
+    'Monday': {},
+    'Tuesday': {},
+    'Wednesday': {},
+    'Thursday': {},
+    'Friday': {},
+    'Saturday': {},
+    'Sunday': {},
+  };
+  static const Map<Activity, Color> activityColors = {
+    Activity.sleep: Color(0xff1f3b54),
+    Activity.work: Color(0xff63baaa),
+    Activity.leisure: Color(0xfff7ae25),
+    Activity.sport: Color(0xffdb6012),
+    Activity.socialMedia: Color(0xffa11006),
+    Activity.other: Color(0xff9d9d9d),
+  };
+
   Map<Activity, Stopwatch> stopwatches = {
     Activity.sleep: Stopwatch(),
     Activity.work: Stopwatch(),
@@ -36,8 +65,47 @@ class TimeTracker {
     Activity.other: {},
   };
 
+  Map<Activity, int> get trackedTime {
+    return _trackedTime;
+  }
+
+  Map<String, Map<Activity, int>> get timeLimits {
+    // init and random values for testing
+    initTimeLimits();
+    _timeLimits['Sunday'] = {
+      Activity.sleep: 480,
+      Activity.work: 480,
+      Activity.leisure: 210,
+      Activity.sport: 100,
+      Activity.socialMedia: 60,
+      Activity.other: 270,
+    };
+
+    return _timeLimits;
+  }
+
+  void initTimeLimits() {
+    for (Activity activity in Activity.values) {
+      setTimeLimit('Monday', activity, 0);
+      setTimeLimit('Tuesday', activity, 0);
+      setTimeLimit('Wednesday', activity, 0);
+      setTimeLimit('Thursday', activity, 0);
+      setTimeLimit('Friday', activity, 0);
+      setTimeLimit('Saturday', activity, 0);
+      setTimeLimit('Sunday', activity, 0);
+    }
+  }
+
+  void setTimeLimit(String day, Activity activity, int minutes) {
+    _timeLimits[day].update(
+      activity,
+      (int _) => minutes,
+      ifAbsent: () => minutes,
+    );
+  }
+
   void initTrackedTime() {
-    trackedTime = {
+    _trackedTime = {
       Activity.sleep: 0,
       Activity.work: 0,
       Activity.leisure: 0,
@@ -56,7 +124,7 @@ class TimeTracker {
         storedData[activity][currentYear][currentMonth] = {};
       }
       storedData[activity][currentYear][currentMonth][currentDay] =
-          trackedTime[activity];
+          _trackedTime[activity];
     }
   }
 
