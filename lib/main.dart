@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:time_clerk_app/screens/bottom_tab_screen.dart';
 import 'package:time_clerk_app/screens/overview_screen.dart';
+import 'package:time_clerk_app/screens/profile_screen.dart';
 
 void main() => runApp(TimeClerk());
 
@@ -33,7 +34,7 @@ class TimeClerk extends StatelessWidget {
           minWidth: 75,
         ),
       ),
-      home: BottomTabScreen(),
+      home: ProfileScreen(),
     );
   }
 }

@@ -80,7 +80,7 @@ class TimeTracker {
   Map<String, Map<Activity, int>> get timeLimits {
     // init and random values for testing
     initTimeLimits();
-    _timeLimits['Sunday'] = {
+    _timeLimits['Thursday'] = {
       Activity.sleep: 480,
       Activity.work: 480,
       Activity.leisure: 210,

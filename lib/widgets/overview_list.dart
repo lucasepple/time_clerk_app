@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:time_clerk_app/helpers/string_converter.dart';
 
 import 'package:time_clerk_app/models/time_tracker.dart';
 import 'package:time_clerk_app/widgets/tracking_button.dart';
+import 'package:time_clerk_app/widgets/weekday_picker.dart';
 
 class OverviewList extends StatelessWidget {
   final String currentWeekday;
@@ -9,23 +11,6 @@ class OverviewList extends StatelessWidget {
   Map<String, Map<Activity, int>> timeLimits = TimeTracker().timeLimits;
 
   OverviewList(this.currentWeekday);
-
-  String timeString(Map<Activity, int> map, Activity activity) {
-    final int time = map[activity];
-    String timeString;
-    final int hours = time ~/ 60;
-    final int minutes = time % 60;
-    if (hours == 0) {
-      timeString = '${minutes}min';
-    } else {
-      if (minutes == 0) {
-        timeString = '${hours}h';
-      } else {
-        timeString = '${hours}h$minutes';
-      }
-    }
-    return timeString;
-  }
 
   List<Widget> listTileBuilder(BuildContext context) {
     List<Widget> list = [];
@@ -47,7 +32,7 @@ class OverviewList extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyText1,
                   children: <TextSpan>[
                     TextSpan(
-                      text: timeString(trackedTime, activity),
+                      text: StringConverter.timeString(trackedTime, activity),
                       style: TextStyle(
                         color: TimeTracker.activityColors[activity],
                         fontWeight: (trackedTime[activity] >
@@ -60,7 +45,8 @@ class OverviewList extends StatelessWidget {
                       text: ' / ',
                     ),
                     TextSpan(
-                      text: timeString(timeLimits[currentWeekday], activity),
+                      text: StringConverter.timeString(
+                          timeLimits[currentWeekday], activity),
                     ),
                   ],
                 ),
