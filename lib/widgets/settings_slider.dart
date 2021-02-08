@@ -16,11 +16,17 @@ class _SettingsSliderState extends State<SettingsSlider> {
   @override
   Widget build(BuildContext context) {
     return SliderTheme(
-      data: SliderThemeData(trackShape: CustomTrackShape()),
+      data: SliderThemeData(
+        trackShape: CustomTrackShape(),
+        // make shapes varaible
+        thumbShape: RoundSliderThumbShape(enabledThumbRadius: 10),
+        overlayShape: RoundSliderOverlayShape(overlayRadius: 22),
+      ),
       child: Slider(
+        divisions: 144,
         value: _currentSliderValue,
         min: 0,
-        max: 100,
+        max: 720,
         onChanged: (double value) {
           setState(() {
             _currentSliderValue = value;
@@ -33,7 +39,7 @@ class _SettingsSliderState extends State<SettingsSlider> {
   }
 }
 
-class CustomTrackShape extends RoundedRectSliderTrackShape {
+class CustomTrackShape extends RectangularSliderTrackShape {
   Rect getPreferredRect({
     @required RenderBox parentBox,
     Offset offset = Offset.zero,
@@ -41,11 +47,13 @@ class CustomTrackShape extends RoundedRectSliderTrackShape {
     bool isEnabled = false,
     bool isDiscrete = false,
   }) {
-    final double trackHeight = sliderTheme.trackHeight;
-    final double trackLeft = offset.dx;
+    final double trackHeight = 6;
+    // offset modified, replace through variable
+    final double trackLeft = offset.dx + 30;
     final double trackTop =
         offset.dy + (parentBox.size.height - trackHeight) / 2;
-    final double trackWidth = parentBox.size.width;
+    // width modified, replace through variable
+    final double trackWidth = parentBox.size.width - 60;
     return Rect.fromLTWH(trackLeft, trackTop, trackWidth, trackHeight);
   }
 }

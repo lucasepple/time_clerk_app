@@ -15,26 +15,60 @@ class ProfileScreen extends StatelessWidget {
     for (Activity activity in Activity.values) {
       list.add(
         Container(
-          height: 85,
+          padding: EdgeInsets.symmetric(vertical: 9),
           child: Column(
             children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    TimeTracker.activityStrings[activity],
-                    style: Theme.of(context).textTheme.bodyText1,
-                  ),
-                  Text(
-                    StringConverter.timeString(
-                        timeLimits[currentWeekday], activity),
-                    style: Theme.of(context).textTheme.bodyText1.copyWith(
-                          color: TimeTracker.activityColors[activity],
-                        ),
-                  ),
-                ],
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      TimeTracker.activityStrings[activity],
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
+                    Text(
+                      StringConverter.timeString(
+                          timeLimits[currentWeekday], activity),
+                      style: Theme.of(context).textTheme.bodyText1.copyWith(
+                            color: TimeTracker.activityColors[activity],
+                          ),
+                    ),
+                  ],
+                ),
               ),
-              SettingsSlider(activity),
+              Stack(children: <Widget>[
+                Positioned(
+                  // make variable
+                  top: 22 - 3.0,
+                  left: 20,
+                  child: Container(
+                    height: 6,
+                    width: 20,
+                    decoration: BoxDecoration(
+                      color: TimeTracker.activityColors[activity],
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.all(Radius.circular(3.0)),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  // make variable
+                  top: 22 - 3.0,
+                  right: 20,
+                  child: Container(
+                    height: 6,
+                    width: 20,
+                    decoration: BoxDecoration(
+                      // make variable?
+                      color: Color(0xffdddddd),
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.all(Radius.circular(3)),
+                    ),
+                  ),
+                ),
+                SettingsSlider(activity),
+              ]),
             ],
           ),
         ),
@@ -48,44 +82,63 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(20),
+          // padding: const EdgeInsets.all(20),
+          // can maybe be removed
+          padding: const EdgeInsets.all(0),
           child: Column(
             children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'John Doe',
-                        style: Theme.of(context).textTheme.headline1,
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 10,
+                  left: 20,
+                  right: 5,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 10,
                       ),
-                      Text(
-                        'john.doe@mail.com',
-                        style: Theme.of(context).textTheme.headline6,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'John Doe',
+                            style: Theme.of(context).textTheme.headline1,
+                          ),
+                          Text(
+                            'john.doe@mail.com',
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.logout),
-                    onPressed: () {},
-                  ),
-                ],
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.logout),
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
-                height: 45,
+                height: 40,
               ),
-              Container(
-                alignment: Alignment.centerLeft,
-                child: WeekdayPicker(currentWeekday),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Container(
+                  alignment: Alignment.centerLeft,
+                  child: WeekdayPicker(currentWeekday),
+                ),
               ),
-              Container(),
+              SizedBox(
+                height: 10,
+              ),
               Container(
                 width: double.infinity,
                 height: 500,
-                //color: Colors.grey,
+                // color: Colors.grey,
                 child: ListView(
                   children: listTileBuilder(context),
                 ),

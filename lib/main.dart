@@ -26,7 +26,9 @@ class TimeClerk extends StatelessWidget {
             color: Colors.black,
           ),
           bodyText1: TextStyle(
-            fontSize: 17,
+            // size Home Screen
+            // fontSize: 17,
+            fontSize: 18,
           ),
         ),
         buttonTheme: ButtonThemeData(
