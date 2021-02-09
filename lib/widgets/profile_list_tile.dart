@@ -7,10 +7,10 @@ import 'package:time_clerk_app/providers/time_limits.dart';
 import 'package:time_clerk_app/widgets/settings_slider.dart';
 
 class ProfileListTile extends StatelessWidget {
-  final String currentWeekday;
+  final String selectedWeekday;
   final Activity activity;
 
-  ProfileListTile(this.currentWeekday, this.activity);
+  ProfileListTile(this.selectedWeekday, this.activity);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class ProfileListTile extends StatelessWidget {
                 Consumer<TimeLimits>(
                   builder: (ctx, timeLimits, child) => Text(
                     StringConverter.timeString(
-                        timeLimits.limits[currentWeekday][activity]),
+                        timeLimits.limits[selectedWeekday][activity]),
                     style: Theme.of(context).textTheme.bodyText1.copyWith(
                           color: ActivityProperties.colors[activity],
                         ),
@@ -73,7 +73,7 @@ class ProfileListTile extends StatelessWidget {
                 ),
               ),
             ),
-            SettingsSlider(activity),
+            SettingsSlider(selectedWeekday, activity),
           ]),
         ],
       ),

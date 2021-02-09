@@ -9,12 +9,26 @@ import 'package:time_clerk_app/widgets/profile_list_tile.dart';
 // import 'package:time_clerk_app/widgets/settings_slider.dart';
 import 'package:time_clerk_app/widgets/weekday_picker.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   String selectedWeekday;
+
+  // needs to be current weekday!
+  ProfileScreen({this.selectedWeekday = 'Thursday'});
+
+  @override
+  _ProfileScreenState createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
   final Map<Activity, int> trackedTime = TimeTracker().trackedTime;
+
   final Map<String, Map<Activity, int>> timeLimits = TimeTracker().timeLimits;
 
-  ProfileScreen({this.selectedWeekday = 'Thursday'});
+  void updatePickedDay(String newDay) {
+    setState(() {
+      widget.selectedWeekday = newDay;
+    });
+  }
 
   List<Widget> listTileBuilder(BuildContext context) {
     List<Widget> list = [];
@@ -22,7 +36,7 @@ class ProfileScreen extends StatelessWidget {
     // final timeLimits = Provider.of<TimeLimits>(context, listen: false);
     // timeLimits.initTimeLimits();
     for (Activity activity in Activity.values) {
-      list.add(ProfileListTile(selectedWeekday, activity));
+      list.add(ProfileListTile(widget.selectedWeekday, activity));
     }
     return list;
   }
@@ -79,7 +93,7 @@ class ProfileScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Container(
                   alignment: Alignment.centerLeft,
-                  child: WeekdayPicker(selectedWeekday),
+                  child: WeekdayPicker(widget.selectedWeekday, updatePickedDay),
                 ),
               ),
               SizedBox(

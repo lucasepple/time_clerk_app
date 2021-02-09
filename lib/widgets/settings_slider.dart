@@ -8,36 +8,48 @@ import 'package:time_clerk_app/providers/time_limits.dart';
 class SettingsSlider extends StatefulWidget {
   final Activity activity;
   // get as argument
-  final String selectedDay = 'Thursday';
+  final String selectedDay;
+  // bool isInit;
+  // double currentSliderValue = ;
 
-  SettingsSlider(this.activity);
+  SettingsSlider(this.selectedDay, this.activity);
 
   @override
   _SettingsSliderState createState() => _SettingsSliderState();
 }
 
 class _SettingsSliderState extends State<SettingsSlider> {
-  double _currentSliderValue;
-  bool isInit = false;
-  var timeLimits;
-  @override
-  void didChangeDependencies() {
-    if (!isInit) {
-      timeLimits = Provider.of<TimeLimits>(context, listen: false);
-      final currentLimit =
-          timeLimits.limits[widget.selectedDay][widget.activity];
-      if (currentLimit == null) {
-        _currentSliderValue = 0;
-      } else {
-        _currentSliderValue = currentLimit.toDouble();
-      }
-      isInit = true;
-    }
-    super.didChangeDependencies();
-  }
+  // double _currentSliderValue;
+  // var timeLimits;
+  // @override
+  // void didChangeDependencies() {
+  //   print('build');
+  //   if (!widget.isInit) {
+  //     timeLimits = Provider.of<TimeLimits>(context, listen: false);
+  //     final currentLimit =
+  //         timeLimits.limits[widget.selectedDay][widget.activity];
+  //     if (currentLimit == null) {
+  //       _currentSliderValue = 0;
+  //     } else {
+  //       _currentSliderValue = currentLimit.toDouble();
+  //     }
+  //     widget.isInit = true;
+  //   }
+  //   super.didChangeDependencies();
+  // }
 
   @override
   Widget build(BuildContext context) {
+    double _currentSliderValue;
+    final timeLimits = Provider.of<TimeLimits>(context, listen: false);
+    final currentLimit = timeLimits.limits[widget.selectedDay][widget.activity];
+
+    if (currentLimit == null) {
+      _currentSliderValue = 0;
+    } else {
+      _currentSliderValue = currentLimit.toDouble();
+    }
+
     return SliderTheme(
       data: SliderThemeData(
         trackShape: CustomTrackShape(),
