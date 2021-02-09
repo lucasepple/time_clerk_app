@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import 'package:time_clerk_app/models/time_tracker.dart';
+import 'package:time_clerk_app/models/activity.dart';
 
 class OverviewChart extends StatelessWidget {
   Map<Activity, int> trackedTime = TimeTracker().trackedTime;
@@ -38,7 +39,7 @@ class OverviewChart extends StatelessWidget {
               Container(
                 height: heightFactor() * trackedTime[activity].toDouble(),
                 width: 35,
-                color: TimeTracker.activityColors[activity],
+                color: ActivityProperties.colors[activity],
               ),
               Positioned(
                 bottom: heightFactor() * timeLimits[currentWeekday][activity],
@@ -47,7 +48,7 @@ class OverviewChart extends StatelessWidget {
                     Container(
                       width: 5,
                       height: 0.75,
-                      color: TimeTracker.activityColors[activity],
+                      color: ActivityProperties.colors[activity],
                     ),
                     Container(
                       width: 35,
@@ -57,13 +58,13 @@ class OverviewChart extends StatelessWidget {
                               (heightFactor() *
                                       trackedTime[activity].toDouble() -
                                   0.75)
-                          ? TimeTracker.activityColors[activity]
+                          ? ActivityProperties.colors[activity]
                           : Colors.white,
                     ),
                     Container(
                       width: 5,
                       height: 0.75,
-                      color: TimeTracker.activityColors[activity],
+                      color: ActivityProperties.colors[activity],
                     ),
                   ],
                 ),

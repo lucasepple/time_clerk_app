@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:time_clerk_app/helpers/string_converter.dart';
 
 import 'package:time_clerk_app/models/time_tracker.dart';
+import 'package:time_clerk_app/models/activity.dart';
 import 'package:time_clerk_app/widgets/tracking_button.dart';
-import 'package:time_clerk_app/widgets/weekday_picker.dart';
+// import 'package:time_clerk_app/widgets/weekday_picker.dart';
 
 class OverviewList extends StatelessWidget {
   final String currentWeekday;
@@ -23,7 +24,7 @@ class OverviewList extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  TimeTracker.activityStrings[activity],
+                  ActivityProperties.strings[activity],
                   style: Theme.of(context).textTheme.bodyText1,
                 ),
               ),
@@ -32,9 +33,9 @@ class OverviewList extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyText1,
                   children: <TextSpan>[
                     TextSpan(
-                      text: StringConverter.timeString(trackedTime, activity),
+                      text: StringConverter.timeString(trackedTime[activity]),
                       style: TextStyle(
-                        color: TimeTracker.activityColors[activity],
+                        color: ActivityProperties.colors[activity],
                         fontWeight: (trackedTime[activity] >
                                 timeLimits[currentWeekday][activity])
                             ? FontWeight.w800
@@ -46,7 +47,7 @@ class OverviewList extends StatelessWidget {
                     ),
                     TextSpan(
                       text: StringConverter.timeString(
-                          timeLimits[currentWeekday], activity),
+                          timeLimits[currentWeekday][activity]),
                     ),
                   ],
                 ),

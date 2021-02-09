@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import 'package:time_clerk_app/models/time_tracker.dart';
+// import 'package:time_clerk_app/models/time_tracker.dart';
+import 'package:time_clerk_app/models/activity.dart';
+import 'package:time_clerk_app/providers/time_limits.dart';
 
 class SettingsSlider extends StatefulWidget {
-  Activity activity;
+  final Activity activity;
+  // get as argument
+  final String selectedDay = 'Thursday';
 
   SettingsSlider(this.activity);
 
@@ -12,7 +17,25 @@ class SettingsSlider extends StatefulWidget {
 }
 
 class _SettingsSliderState extends State<SettingsSlider> {
-  double _currentSliderValue = 20;
+  double _currentSliderValue;
+  bool isInit = false;
+  var timeLimits;
+  @override
+  void didChangeDependencies() {
+    if (!isInit) {
+      timeLimits = Provider.of<TimeLimits>(context, listen: false);
+      final currentLimit =
+          timeLimits.limits[widget.selectedDay][widget.activity];
+      if (currentLimit == null) {
+        _currentSliderValue = 0;
+      } else {
+        _currentSliderValue = currentLimit.toDouble();
+      }
+      isInit = true;
+    }
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SliderTheme(
@@ -30,9 +53,11 @@ class _SettingsSliderState extends State<SettingsSlider> {
         onChanged: (double value) {
           setState(() {
             _currentSliderValue = value;
+            timeLimits.setTimeLimit(
+                widget.selectedDay, widget.activity, value.toInt());
           });
         },
-        activeColor: TimeTracker.activityColors[widget.activity],
+        activeColor: ActivityProperties.colors[widget.activity],
         inactiveColor: Color(0xffdddddd),
       ),
     );

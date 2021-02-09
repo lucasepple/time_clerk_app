@@ -1,78 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import 'package:time_clerk_app/helpers/string_converter.dart';
+// import 'package:time_clerk_app/helpers/string_converter.dart';
 import 'package:time_clerk_app/models/time_tracker.dart';
-import 'package:time_clerk_app/widgets/settings_slider.dart';
+import 'package:time_clerk_app/models/activity.dart';
+import 'package:time_clerk_app/providers/time_limits.dart';
+import 'package:time_clerk_app/widgets/profile_list_tile.dart';
+// import 'package:time_clerk_app/widgets/settings_slider.dart';
 import 'package:time_clerk_app/widgets/weekday_picker.dart';
 
 class ProfileScreen extends StatelessWidget {
-  final String currentWeekday = 'Thursday';
+  String selectedWeekday;
   final Map<Activity, int> trackedTime = TimeTracker().trackedTime;
   final Map<String, Map<Activity, int>> timeLimits = TimeTracker().timeLimits;
 
+  ProfileScreen({this.selectedWeekday = 'Thursday'});
+
   List<Widget> listTileBuilder(BuildContext context) {
     List<Widget> list = [];
+    // init for debugging
+    // final timeLimits = Provider.of<TimeLimits>(context, listen: false);
+    // timeLimits.initTimeLimits();
     for (Activity activity in Activity.values) {
-      list.add(
-        Container(
-          padding: EdgeInsets.symmetric(vertical: 9),
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      TimeTracker.activityStrings[activity],
-                      style: Theme.of(context).textTheme.bodyText1,
-                    ),
-                    Text(
-                      StringConverter.timeString(
-                          timeLimits[currentWeekday], activity),
-                      style: Theme.of(context).textTheme.bodyText1.copyWith(
-                            color: TimeTracker.activityColors[activity],
-                          ),
-                    ),
-                  ],
-                ),
-              ),
-              Stack(children: <Widget>[
-                Positioned(
-                  // make variable
-                  top: 22 - 3.0,
-                  left: 20,
-                  child: Container(
-                    height: 6,
-                    width: 20,
-                    decoration: BoxDecoration(
-                      color: TimeTracker.activityColors[activity],
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.all(Radius.circular(3.0)),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  // make variable
-                  top: 22 - 3.0,
-                  right: 20,
-                  child: Container(
-                    height: 6,
-                    width: 20,
-                    decoration: BoxDecoration(
-                      // make variable?
-                      color: Color(0xffdddddd),
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.all(Radius.circular(3)),
-                    ),
-                  ),
-                ),
-                SettingsSlider(activity),
-              ]),
-            ],
-          ),
-        ),
-      );
+      list.add(ProfileListTile(selectedWeekday, activity));
     }
     return list;
   }
@@ -129,7 +79,7 @@ class ProfileScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Container(
                   alignment: Alignment.centerLeft,
-                  child: WeekdayPicker(currentWeekday),
+                  child: WeekdayPicker(selectedWeekday),
                 ),
               ),
               SizedBox(

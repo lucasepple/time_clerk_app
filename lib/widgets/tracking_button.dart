@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:time_clerk_app/models/time_tracker.dart';
+import 'package:time_clerk_app/models/activity.dart';
 
 class TrackingButton extends StatefulWidget {
   final Activity activity;
@@ -23,14 +24,13 @@ class _TrackingButtonState extends State<TrackingButton> {
       hoverElevation: 0,
       focusElevation: 0,
       highlightElevation: 0,
-      color:
-          _start ? Colors.white : TimeTracker.activityColors[widget.activity],
+      color: _start ? Colors.white : ActivityProperties.colors[widget.activity],
       textColor:
-          _start ? TimeTracker.activityColors[widget.activity] : Colors.white,
+          _start ? ActivityProperties.colors[widget.activity] : Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(18),
         side: BorderSide(
-          color: TimeTracker.activityColors[widget.activity],
+          color: ActivityProperties.colors[widget.activity],
           width: 0.5,
         ),
       ),
