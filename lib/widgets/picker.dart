@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class WeekdayPicker extends StatefulWidget {
+class Picker extends StatefulWidget {
   String dropdownValue;
   final Function(String) updatePickedDay;
 
-  WeekdayPicker(this.dropdownValue, this.updatePickedDay);
+  Picker(this.dropdownValue, this.updatePickedDay);
 
   @override
-  _WeekdayPickerState createState() => _WeekdayPickerState();
+  _PickerState createState() => _PickerState();
 }
 
-class _WeekdayPickerState extends State<WeekdayPicker> {
+class _PickerState extends State<Picker> {
   final List<String> _items = <String>[
     'Monday',
     'Tuesday',

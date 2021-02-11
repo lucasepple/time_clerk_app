@@ -7,7 +7,7 @@ import 'package:time_clerk_app/models/activity.dart';
 import 'package:time_clerk_app/providers/time_limits.dart';
 import 'package:time_clerk_app/widgets/profile_list_tile.dart';
 // import 'package:time_clerk_app/widgets/settings_slider.dart';
-import 'package:time_clerk_app/widgets/weekday_picker.dart';
+import 'package:time_clerk_app/widgets/picker.dart';
 
 class ProfileScreen extends StatefulWidget {
   String selectedWeekday;
@@ -93,7 +93,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Container(
                   alignment: Alignment.centerLeft,
-                  child: WeekdayPicker(widget.selectedWeekday, updatePickedDay),
+                  child: Picker(widget.selectedWeekday, updatePickedDay),
                 ),
               ),
               SizedBox(

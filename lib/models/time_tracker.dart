@@ -40,8 +40,45 @@ class TimeTracker {
     Activity.other: Stopwatch(),
   };
   Timer timer;
-  Map<Activity, Map<int, Map<String, Map<int, int>>>> storedData = {
-    Activity.sleep: {},
+  // initted fotr dev
+  Map<Activity, Map<int, Map<String, Map<int, int>>>> _storedData = {
+    Activity.sleep: {
+      2021: {
+        'February': {
+          1: 540,
+          2: 400,
+          3: 300,
+          4: 400,
+          5: 500,
+          6: 340,
+          7: 400,
+          8: 200,
+          9: 400,
+          10: 300,
+          11: 400,
+          12: 500,
+          13: 300,
+          14: 400,
+          15: 540,
+          16: 400,
+          17: 300,
+          18: 400,
+          19: 500,
+          20: 340,
+          21: 400,
+          22: 200,
+          23: 400,
+          24: 300,
+          25: 400,
+          26: 500,
+          27: 300,
+          28: 400,
+          29: 470,
+          30: 370,
+          31: 510,
+        }
+      },
+    },
     Activity.work: {},
     Activity.leisure: {},
     Activity.sport: {},
@@ -50,7 +87,11 @@ class TimeTracker {
   };
 
   Map<Activity, int> get trackedTime {
-    return _trackedTime;
+    return {..._trackedTime};
+  }
+
+  Map<Activity, Map<int, Map<String, Map<int, int>>>> get storedData {
+    return {..._storedData};
   }
 
   Map<String, Map<Activity, int>> get timeLimits {
@@ -80,6 +121,48 @@ class TimeTracker {
     }
   }
 
+// combine with yearly Avg
+  double monthlyAvg(int year, String month, Activity activity) {
+    double avg = 0;
+    int totalTime = 0;
+    int amount = 0;
+    if (TimeTracker().storedData[activity][year] != null) {
+      _storedData[activity][year][month].forEach(
+        (day, minutes) {
+          totalTime += minutes;
+          amount++;
+        },
+      );
+    }
+    if (totalTime != 0) {
+      avg = totalTime / amount;
+    }
+    return avg;
+  }
+
+// combine wth monthlyAvg
+  double yearlyAvg(int year, Activity activity) {
+    double avg = 0;
+    int totalTime = 0;
+    int amount = 0;
+    if (TimeTracker().storedData[activity][year] != null) {
+      _storedData[activity][year].forEach(
+        (month, daysMap) {
+          daysMap.forEach(
+            (day, minutes) {
+              totalTime += minutes;
+              amount++;
+            },
+          );
+        },
+      );
+    }
+    if (totalTime != 0) {
+      avg = totalTime / amount;
+    }
+    return avg;
+  }
+
   void setTimeLimit(String day, Activity activity, int minutes) {
     _timeLimits[day].update(
       activity,
@@ -101,13 +184,13 @@ class TimeTracker {
 
   Future<void> saveCurrentData() async {
     for (Activity activity in Activity.values) {
-      if (!storedData[activity].containsKey(currentYear)) {
-        storedData[activity][currentYear] = {};
+      if (!_storedData[activity].containsKey(currentYear)) {
+        _storedData[activity][currentYear] = {};
       }
-      if (!storedData[activity][currentYear].containsKey(currentMonth)) {
-        storedData[activity][currentYear][currentMonth] = {};
+      if (!_storedData[activity][currentYear].containsKey(currentMonth)) {
+        _storedData[activity][currentYear][currentMonth] = {};
       }
-      storedData[activity][currentYear][currentMonth][currentDay] =
+      _storedData[activity][currentYear][currentMonth][currentDay] =
           _trackedTime[activity];
     }
   }

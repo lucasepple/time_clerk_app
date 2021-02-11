@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'package:time_clerk_app/providers/time_limits.dart';
 import 'package:time_clerk_app/screens/bottom_tab_screen.dart';
+import 'package:time_clerk_app/screens/month_stats_screen.dart';
 import 'package:time_clerk_app/screens/overview_screen.dart';
 import 'package:time_clerk_app/screens/profile_screen.dart';
 
@@ -16,6 +17,7 @@ class TimeClerk extends StatelessWidget {
       child: MaterialApp(
         title: 'Time Clerk',
         theme: ThemeData(
+          primaryColor: Colors.white,
           backgroundColor: Colors.white,
           fontFamily: 'Muli',
           textTheme: TextTheme(
@@ -40,7 +42,7 @@ class TimeClerk extends StatelessWidget {
             minWidth: 75,
           ),
         ),
-        home: ProfileScreen(),
+        home: MonthStatsScreen(),
       ),
     );
   }
