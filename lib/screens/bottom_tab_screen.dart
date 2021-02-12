@@ -7,6 +7,7 @@ class BottomTabScreen extends StatefulWidget {
 
 class _BottomTabScreenState extends State<BottomTabScreen> {
   int _selectedIndex = 0;
+  double _fontSize = 25;
   static const List<Widget> _screens = <Widget>[
     Text(
       'Overview',
@@ -31,34 +32,88 @@ class _BottomTabScreenState extends State<BottomTabScreen> {
       body: Center(
         child: _screens.elementAt(_selectedIndex),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: _selectedIndex == 0
-                ? Icon(Icons.home)
-                : Icon(Icons.home_outlined),
-            label: 'Home',
+      bottomNavigationBar: Stack(
+        children: [
+          Container(
+            height: 60,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black54,
+                    blurRadius: 30,
+                    offset: Offset(0, 22)),
+              ],
+            ),
           ),
-          BottomNavigationBarItem(
-            icon: _selectedIndex == 1
-                ? Icon(Icons.bar_chart)
-                : Icon(Icons.bar_chart_outlined),
-            label: 'Stats',
-          ),
-          BottomNavigationBarItem(
-            icon: _selectedIndex == 2
-                ? Icon(Icons.person)
-                : Icon(Icons.person_outlined),
-            label: 'Profile',
+          Container(
+            height: 60,
+            padding: EdgeInsets.symmetric(
+              horizontal: 25,
+            ),
+            child: BottomNavigationBar(
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+              items: <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: _selectedIndex == 0
+                      ? Text(
+                          '2',
+                          style: TextStyle(
+                              fontSize: _fontSize,
+                              fontFamily: 'Time-Clerk-Icons'),
+                        )
+                      : Text(
+                          '1',
+                          style: TextStyle(
+                              fontSize: _fontSize,
+                              fontFamily: 'Time-Clerk-Icons'),
+                        ),
+                  label: 'Home',
+                ),
+                BottomNavigationBarItem(
+                  icon: _selectedIndex == 1
+                      ? Text(
+                          '4',
+                          style: TextStyle(
+                              fontSize: _fontSize,
+                              fontFamily: 'Time-Clerk-Icons'),
+                        )
+                      : Text(
+                          '3',
+                          style: TextStyle(
+                              fontSize: _fontSize,
+                              fontFamily: 'Time-Clerk-Icons'),
+                        ),
+                  label: 'Stats',
+                ),
+                BottomNavigationBarItem(
+                  icon: _selectedIndex == 2
+                      ? Text(
+                          '6',
+                          style: TextStyle(
+                              fontSize: _fontSize,
+                              fontFamily: 'Time-Clerk-Icons'),
+                        )
+                      : Text(
+                          '5',
+                          style: TextStyle(
+                              fontSize: _fontSize,
+                              fontFamily: 'Time-Clerk-Icons'),
+                        ),
+                  label: 'Profile',
+                ),
+              ],
+              currentIndex: _selectedIndex,
+              selectedItemColor: Colors.black,
+              iconSize: 30,
+              elevation: 0,
+              onTap: _onIconTapped,
+              backgroundColor: Theme.of(context).primaryColor,
+            ),
           ),
         ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.black,
-        iconSize: 30,
-        elevation: 20,
-        onTap: _onIconTapped,
       ),
     );
   }

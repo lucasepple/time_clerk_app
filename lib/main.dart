@@ -15,6 +15,7 @@ class TimeClerk extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (ctx) => TimeLimits(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Time Clerk',
         theme: ThemeData(
           primaryColor: Colors.white,
@@ -42,7 +43,7 @@ class TimeClerk extends StatelessWidget {
             minWidth: 75,
           ),
         ),
-        home: MonthStatsScreen(),
+        home: BottomTabScreen(),
       ),
     );
   }
