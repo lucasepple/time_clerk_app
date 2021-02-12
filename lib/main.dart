@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:time_clerk_app/providers/time_limits.dart';
-import 'package:time_clerk_app/screens/bottom_tab_screen.dart';
-import 'package:time_clerk_app/screens/month_stats_screen.dart';
+import 'package:time_clerk_app/screens/tab_screen.dart';
+import 'package:time_clerk_app/screens/stats_screen.dart';
 import 'package:time_clerk_app/screens/overview_screen.dart';
 import 'package:time_clerk_app/screens/profile_screen.dart';
 
@@ -19,23 +19,24 @@ class TimeClerk extends StatelessWidget {
         title: 'Time Clerk',
         theme: ThemeData(
           primaryColor: Colors.white,
-          backgroundColor: Colors.white,
+          // backgroundColor: Colors.white,
+          accentColor: Colors.black,
           fontFamily: 'Muli',
           textTheme: TextTheme(
             headline1: TextStyle(
               fontWeight: FontWeight.w600,
-              fontSize: 25,
+              fontSize: 24,
               color: Colors.black,
             ),
             headline6: TextStyle(
               fontWeight: FontWeight.w200,
-              fontSize: 20,
+              fontSize: 19,
               color: Colors.black,
             ),
             bodyText1: TextStyle(
               // size Home Screen
               // fontSize: 17,
-              fontSize: 18,
+              fontSize: 17,
             ),
           ),
           buttonTheme: ButtonThemeData(
@@ -43,7 +44,7 @@ class TimeClerk extends StatelessWidget {
             minWidth: 75,
           ),
         ),
-        home: BottomTabScreen(),
+        home: TabScreen(),
       ),
     );
   }

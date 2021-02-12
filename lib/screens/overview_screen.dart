@@ -32,7 +32,7 @@ class OverviewScreen extends StatelessWidget {
             style: Theme.of(ctx).textTheme.headline1,
           ),
           SizedBox(
-            height: 1,
+            height: 2,
           ),
           Text(
             '${dayOfMonthWithSuffix(currentDay)} ${DateFormat('of MMMM y').format(DateTime.now()).toString()}',
@@ -45,25 +45,24 @@ class OverviewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // backgroundColor: Theme.of(context).backgroundColor,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            children: <Widget>[
-              dateBuilder(context),
-              SizedBox(
-                height: 33,
-              ),
-              OverviewChart(currentWeekday),
-              SizedBox(
-                height: 33,
-              ),
-              OverviewList(currentWeekday),
-            ],
+    return Padding(
+      padding: const EdgeInsets.only(
+        top: 18,
+        left: 18,
+        right: 18,
+      ),
+      child: Column(
+        children: <Widget>[
+          dateBuilder(context),
+          SizedBox(
+            height: 24,
           ),
-        ),
+          OverviewChart(currentWeekday),
+          SizedBox(
+            height: 24,
+          ),
+          OverviewList(currentWeekday),
+        ],
       ),
     );
   }

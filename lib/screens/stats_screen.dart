@@ -6,12 +6,21 @@ import 'package:time_clerk_app/models/activity.dart';
 import 'package:time_clerk_app/widgets/stats_tile.dart';
 import 'package:time_clerk_app/widgets/picker.dart';
 
-class MonthStatsScreen extends StatefulWidget {
-  @override
-  _MonthStatsScreenState createState() => _MonthStatsScreenState();
+enum StatsType {
+  month,
+  year,
 }
 
-class _MonthStatsScreenState extends State<MonthStatsScreen> {
+class StatsScreen extends StatefulWidget {
+  final StatsType statsType;
+
+  StatsScreen(this.statsType);
+
+  @override
+  _StatsScreenState createState() => _StatsScreenState();
+}
+
+class _StatsScreenState extends State<StatsScreen> {
   int _currentIndex = 0;
   int selectedYear = 2021;
   String selcetedMonth = 'February';
@@ -43,7 +52,7 @@ class _MonthStatsScreenState extends State<MonthStatsScreen> {
               width: double.infinity,
             ),
             SizedBox(
-              height: 70,
+              height: 20,
             ),
             // AverageStatsTile(),
             CarouselSlider(

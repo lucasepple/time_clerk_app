@@ -18,7 +18,8 @@ class OverviewList extends StatelessWidget {
     for (Activity activity in Activity.values) {
       list.add(
         Container(
-          height: 60,
+          // maybe change size of first and last container
+          height: 62,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -66,12 +67,19 @@ class OverviewList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 350,
-      // color: Colors.grey,
-      child: ListView(
-        children: listTileBuilder(context),
+    return Expanded(
+      child: Container(
+        width: double.infinity,
+        // height: 350,
+        // color: Colors.grey,
+        child: ScrollConfiguration(
+          behavior: ScrollBehavior(),
+          child: ListView(
+            children: listTileBuilder(context),
+            // Condition when device size is large enough
+            physics: NeverScrollableScrollPhysics(),
+          ),
+        ),
       ),
     );
   }
