@@ -62,32 +62,59 @@ class StatsTile extends StatelessWidget {
           height: 50,
           width: double.infinity,
           // color: Colors.grey,
+          // not very elegan!
           child: activity != null
-              ? Row(
-                  // not very elegant!
-                  children: [
-                    SizedBox(width: 83),
-                    Text(
-                      '07.',
-                      style: Theme.of(context).textTheme.bodyText2,
-                    ),
-                    SizedBox(width: 41),
-                    Text(
-                      '14.',
-                      style: Theme.of(context).textTheme.bodyText2,
-                    ),
-                    SizedBox(width: 41),
-                    Text(
-                      '21.',
-                      style: Theme.of(context).textTheme.bodyText2,
-                    ),
-                    SizedBox(width: 41),
-                    Text(
-                      '28.',
-                      style: Theme.of(context).textTheme.bodyText2,
-                    ),
-                  ],
-                )
+              ? month != null
+                  ? Row(
+                      // not very elegant!
+                      children: [
+                        SizedBox(width: 83),
+                        Text(
+                          '07.',
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
+                        SizedBox(width: 41),
+                        Text(
+                          '14.',
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
+                        SizedBox(width: 41),
+                        Text(
+                          '21.',
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
+                        SizedBox(width: 41),
+                        Text(
+                          '28.',
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
+                      ],
+                    )
+                  : Row(
+                      // not very elegant!
+                      children: [
+                        SizedBox(width: 83),
+                        Text(
+                          'Mar',
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
+                        SizedBox(width: 41),
+                        Text(
+                          'Jun',
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
+                        SizedBox(width: 41),
+                        Text(
+                          'Sep',
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
+                        SizedBox(width: 41),
+                        Text(
+                          'Dec',
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
+                      ],
+                    )
               : null,
         ),
       ],
@@ -167,17 +194,13 @@ class StatsTile extends StatelessWidget {
   }
 
   List<Widget> activityChartBarBuilder() {
-    List<int> data = [];
+    List<num> data = [];
     List<Widget> bars = [];
     if (TimeTracker().storedData[activity][year] != null) {
       if (month == null) {
         TimeTracker().storedData[activity][year].forEach(
           (month, daysMap) {
-            daysMap.forEach(
-              (day, minutes) {
-                data.add(minutes);
-              },
-            );
+            data.add(TimeTracker().monthlyAvg(year, month, activity));
           },
         );
       } else {
@@ -190,10 +213,10 @@ class StatsTile extends StatelessWidget {
     }
     for (int i = 0; i < data.length; i++) {
       bars.add(Container(
-        margin: EdgeInsets.symmetric(horizontal: 1.5),
+        margin: EdgeInsets.symmetric(horizontal: month != null ? 1.5 : 3.25),
         color: ActivityProperties.colors[activity],
         height: data[i] * pxPerMin,
-        width: 6.5,
+        width: month != null ? 6.5 : 18,
       ));
     }
     return bars;

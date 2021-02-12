@@ -30,7 +30,7 @@ class _StatsScreenState extends State<StatsScreen> {
     for (Activity activity in Activity.values) {
       list.add(StatsTile(
         year: selectedYear,
-        month: selcetedMonth,
+        month: widget.statsType == StatsType.month ? selcetedMonth : null,
         activity: activity,
       ));
     }
@@ -61,7 +61,9 @@ class _StatsScreenState extends State<StatsScreen> {
               items: <Widget>[
                 StatsTile(
                   year: selectedYear,
-                  month: selcetedMonth,
+                  month: widget.statsType == StatsType.month
+                      ? selcetedMonth
+                      : null,
                 ),
                 ..._statsTileList(),
               ],

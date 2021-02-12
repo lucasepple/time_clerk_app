@@ -44,6 +44,9 @@ class TimeTracker {
   Map<Activity, Map<int, Map<String, Map<int, int>>>> _storedData = {
     Activity.sleep: {
       2021: {
+        'January': {
+          1: 530,
+        },
         'February': {
           1: 540,
           2: 400,
@@ -76,7 +79,37 @@ class TimeTracker {
           29: 470,
           30: 370,
           31: 510,
-        }
+        },
+        'March': {
+          1: 330,
+        },
+        'April': {
+          1: 430,
+        },
+        'May': {
+          1: 470,
+        },
+        'June': {
+          1: 450,
+        },
+        'July': {
+          1: 480,
+        },
+        'August': {
+          1: 450,
+        },
+        'September': {
+          1: 410,
+        },
+        'October': {
+          1: 450,
+        },
+        'November': {
+          1: 480,
+        },
+        'December': {
+          1: 340,
+        },
       },
     },
     Activity.work: {},
