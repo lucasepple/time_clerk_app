@@ -39,66 +39,60 @@ class _StatsScreenState extends State<StatsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
-          children: <Widget>[
-            SizedBox(
-              height: 30,
-            ),
-            Container(
-              padding: EdgeInsets.only(left: 25),
-              child: Picker(
-                statsType: widget.statsType,
-              ),
-              width: double.infinity,
-            ),
-            SizedBox(
-              height: 60,
-            ),
-            // AverageStatsTile(),
-            CarouselSlider(
-              items: <Widget>[
-                StatsTile(
-                  year: selectedYear,
-                  month: widget.statsType == StatsType.month
-                      ? selcetedMonth
-                      : null,
-                ),
-                ..._statsTileList(),
-              ],
-              options: CarouselOptions(
-                  height: 370, // same as tile height
-                  viewportFraction: 1,
-                  onPageChanged: (index, _) {
-                    setState(() {
-                      _currentIndex = index;
-                    });
-                  }),
-            ),
-            SizedBox(
-              height: 25,
-            ),
-            DotsIndicator(
-              dotsCount: 7,
-              position: _currentIndex.toDouble(),
-              decorator: DotsDecorator(
-                size: Size.square(8),
-                activeSize: Size.square(11),
-                shape: CircleBorder(
-                  side: BorderSide(
-                    width: 0.5,
-                    color: Colors.black,
-                  ),
-                ),
-                color: Theme.of(context).primaryColor,
-                activeColor: Color(0xff5d5d5d),
-                spacing: EdgeInsets.all(4),
-              ),
-            ),
-          ],
+    return Column(
+      children: <Widget>[
+        SizedBox(
+          height: 30,
         ),
-      ),
+        Container(
+          padding: EdgeInsets.only(left: 25),
+          child: Picker(
+            statsType: widget.statsType,
+          ),
+          width: double.infinity,
+        ),
+        SizedBox(
+          height: 60,
+        ),
+        // AverageStatsTile(),
+        CarouselSlider(
+          items: <Widget>[
+            StatsTile(
+              year: selectedYear,
+              month: widget.statsType == StatsType.month ? selcetedMonth : null,
+            ),
+            ..._statsTileList(),
+          ],
+          options: CarouselOptions(
+              height: 370, // same as tile height
+              viewportFraction: 1,
+              onPageChanged: (index, _) {
+                setState(() {
+                  _currentIndex = index;
+                });
+              }),
+        ),
+        SizedBox(
+          height: 25,
+        ),
+        DotsIndicator(
+          dotsCount: 7,
+          position: _currentIndex.toDouble(),
+          decorator: DotsDecorator(
+            size: Size.square(8),
+            activeSize: Size.square(11),
+            shape: CircleBorder(
+              side: BorderSide(
+                width: 0.5,
+                color: Colors.black,
+              ),
+            ),
+            color: Theme.of(context).primaryColor,
+            activeColor: Color(0xff5d5d5d),
+            spacing: EdgeInsets.all(4),
+          ),
+        ),
+      ],
     );
   }
 }

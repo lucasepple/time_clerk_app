@@ -43,77 +43,71 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          // padding: const EdgeInsets.all(20),
-          // can maybe be removed
-          padding: const EdgeInsets.all(0),
-          child: Column(
+    return Column(
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.only(
+            top: 10,
+            left: 20,
+            right: 5,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.only(
                   top: 10,
-                  left: 20,
-                  right: 5,
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        top: 10,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'John Doe',
-                            style: Theme.of(context).textTheme.headline1,
-                          ),
-                          Text(
-                            'john.doe@mail.com',
-                            style: Theme.of(context).textTheme.headline6,
-                          ),
-                        ],
-                      ),
+                  children: [
+                    Text(
+                      'John Doe',
+                      style: Theme.of(context).textTheme.headline1,
                     ),
-                    IconButton(
-                      icon: Icon(Icons.logout),
-                      onPressed: () {},
+                    Text(
+                      'john.doe@mail.com',
+                      style: Theme.of(context).textTheme.headline6,
                     ),
                   ],
                 ),
               ),
-              SizedBox(
-                height: 30,
+              IconButton(
+                icon: Icon(Icons.logout),
+                onPressed: () {},
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Container(
-                  alignment: Alignment.centerLeft,
-                  child: Picker(
-                    currentValue: widget.selectedWeekday,
-                    updatePickedDay: updatePickedDay,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                width: double.infinity,
-                height: 500,
-                // color: Colors.grey,
-                child: ListView(
-                  children: listTileBuilder(context),
-                ),
-              )
             ],
           ),
         ),
-      ),
+        SizedBox(
+          height: 50,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Container(
+            alignment: Alignment.centerLeft,
+            child: Picker(
+              currentValue: widget.selectedWeekday,
+              updatePickedDay: updatePickedDay,
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 15,
+        ),
+        Expanded(
+          // color: Colors.grey,
+          child: ScrollConfiguration(
+            behavior: ScrollBehavior(),
+            child: ListView(
+              children: listTileBuilder(context),
+              // Condition when device size is large enough
+              physics: NeverScrollableScrollPhysics(),
+            ),
+          ),
+        )
+      ],
     );
   }
 }

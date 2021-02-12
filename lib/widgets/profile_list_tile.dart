@@ -19,7 +19,7 @@ class ProfileListTile extends StatelessWidget {
     // final limit = timeLimits.limits[currentWeekday][activity];
     // print(limit);
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 9),
+      padding: EdgeInsets.symmetric(vertical: 5),
       child: Column(
         children: <Widget>[
           Padding(
@@ -29,7 +29,9 @@ class ProfileListTile extends StatelessWidget {
               children: <Widget>[
                 Text(
                   ActivityProperties.strings[activity],
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyText1.copyWith(
+                        fontSize: 19,
+                      ),
                 ),
                 Consumer<TimeLimits>(
                   builder: (ctx, timeLimits, child) => Text(
@@ -37,6 +39,7 @@ class ProfileListTile extends StatelessWidget {
                         timeLimits.limits[selectedWeekday][activity]),
                     style: Theme.of(context).textTheme.bodyText1.copyWith(
                           color: ActivityProperties.colors[activity],
+                          fontSize: 19,
                         ),
                   ),
                 ),
