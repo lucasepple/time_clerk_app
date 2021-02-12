@@ -87,13 +87,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               SizedBox(
-                height: 40,
+                height: 30,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Container(
                   alignment: Alignment.centerLeft,
-                  child: Picker(widget.selectedWeekday, updatePickedDay),
+                  child: Picker(
+                    currentValue: widget.selectedWeekday,
+                    updatePickedDay: updatePickedDay,
+                  ),
                 ),
               ),
               SizedBox(

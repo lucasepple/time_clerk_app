@@ -38,6 +38,9 @@ class TimeClerk extends StatelessWidget {
               // fontSize: 17,
               fontSize: 17,
             ),
+            bodyText2: TextStyle(
+              fontSize: 15,
+            ),
           ),
           buttonTheme: ButtonThemeData(
             height: 25,

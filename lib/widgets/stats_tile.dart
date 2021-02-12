@@ -6,11 +6,11 @@ import 'package:time_clerk_app/models/time_tracker.dart';
 // TEST IF ALL AXIS ALIGNMENTS ARE NECESSARY!
 
 class StatsTile extends StatelessWidget {
-  static const double tileHeight = 420;
-  static const double chartHeight = 310;
+  static const double tileHeight = 370;
+  static const double chartHeight = 260;
   static const double maxHeightFactor = 0.8;
   // max height = highest label (-1/2 Font Size)
-  final double pxPerMin = 0.5389;
+  final double pxPerMin = 0.4;
   Activity activity;
   final int year;
   String month;
@@ -69,22 +69,22 @@ class StatsTile extends StatelessWidget {
                     SizedBox(width: 83),
                     Text(
                       '07.',
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.bodyText2,
                     ),
                     SizedBox(width: 41),
                     Text(
                       '14.',
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.bodyText2,
                     ),
                     SizedBox(width: 41),
                     Text(
                       '21.',
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.bodyText2,
                     ),
                     SizedBox(width: 41),
                     Text(
                       '28.',
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.bodyText2,
                     ),
                   ],
                 )
@@ -114,7 +114,7 @@ class StatsTile extends StatelessWidget {
         child: Container(
           child: Text(
             '${3 * i}h',
-            style: Theme.of(context).textTheme.bodyText1,
+            style: Theme.of(context).textTheme.bodyText2,
           ),
         ),
       ));
@@ -139,13 +139,16 @@ class StatsTile extends StatelessWidget {
         Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
-            RotatedBox(
-              quarterTurns: -1,
-              child: Text(
-                ActivityProperties.strings[avgActivity],
-                style: Theme.of(context).textTheme.bodyText1,
+            if (month != null
+                ? TimeTracker().monthlyAvg(year, month, avgActivity) != 0
+                : TimeTracker().yearlyAvg(year, avgActivity) != 0)
+              RotatedBox(
+                quarterTurns: -1,
+                child: Text(
+                  ActivityProperties.strings[avgActivity],
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
               ),
-            ),
             SizedBox(height: 8),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 7),
@@ -210,7 +213,7 @@ class StatsTile extends StatelessWidget {
         children: <Widget>[
           Text(
             activity == null ? 'Average' : ActivityProperties.strings[activity],
-            style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 28),
+            style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 24),
           ),
           chartBuilder(context),
         ],

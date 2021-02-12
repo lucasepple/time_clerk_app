@@ -40,7 +40,7 @@ class TimeTracker {
     Activity.other: Stopwatch(),
   };
   Timer timer;
-  // initted fotr dev
+  // initted for dev
   Map<Activity, Map<int, Map<String, Map<int, int>>>> _storedData = {
     Activity.sleep: {
       2021: {
