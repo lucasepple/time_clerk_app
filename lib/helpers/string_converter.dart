@@ -1,7 +1,7 @@
 // import 'package:time_clerk_app/models/activity.dart';
 
 class StringConverter {
-  static String timeString(int time) {
+  static String timeString(int? time) {
     String timeString;
     if (time != null && time != 0) {
       final int hours = time ~/ 60;

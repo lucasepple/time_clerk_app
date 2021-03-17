@@ -30,7 +30,7 @@ class TimeLimits with ChangeNotifier {
   }
 
   void setTimeLimit(String day, Activity activity, int minutes) {
-    _limits[day].update(
+    _limits[day]!.update(
       activity,
       (int _) => minutes,
       ifAbsent: () => minutes,

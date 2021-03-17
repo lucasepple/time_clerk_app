@@ -3,9 +3,6 @@ import 'package:provider/provider.dart';
 
 import 'package:time_clerk_app/providers/time_limits.dart';
 import 'package:time_clerk_app/screens/tab_screen.dart';
-import 'package:time_clerk_app/screens/stats_screen.dart';
-import 'package:time_clerk_app/screens/overview_screen.dart';
-import 'package:time_clerk_app/screens/profile_screen.dart';
 
 void main() => runApp(TimeClerk());
 

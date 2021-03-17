@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';
 
 // import 'package:time_clerk_app/helpers/string_converter.dart';
 import 'package:time_clerk_app/models/time_tracker.dart';
 import 'package:time_clerk_app/models/activity.dart';
-import 'package:time_clerk_app/providers/time_limits.dart';
+// import 'package:time_clerk_app/providers/time_limits.dart';
 import 'package:time_clerk_app/widgets/profile_list_tile.dart';
 // import 'package:time_clerk_app/widgets/settings_slider.dart';
 import 'package:time_clerk_app/widgets/picker.dart';
@@ -24,9 +24,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   final Map<String, Map<Activity, int>> timeLimits = TimeTracker().timeLimits;
 
-  void updatePickedDay(String newDay) {
+  void updatePickedDay(String? newDay) {
     setState(() {
-      widget.selectedWeekday = newDay;
+      widget.selectedWeekday = newDay!;
     });
   }
 

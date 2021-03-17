@@ -42,7 +42,7 @@ class _SettingsSliderState extends State<SettingsSlider> {
   Widget build(BuildContext context) {
     double _currentSliderValue;
     final timeLimits = Provider.of<TimeLimits>(context, listen: false);
-    final currentLimit = timeLimits.limits[widget.selectedDay][widget.activity];
+    final currentLimit = timeLimits.limits[widget.selectedDay]![widget.activity];
 
     if (currentLimit == null) {
       _currentSliderValue = 0;
@@ -78,9 +78,9 @@ class _SettingsSliderState extends State<SettingsSlider> {
 
 class CustomTrackShape extends RectangularSliderTrackShape {
   Rect getPreferredRect({
-    @required RenderBox parentBox,
+    required RenderBox parentBox,
     Offset offset = Offset.zero,
-    @required SliderThemeData sliderTheme,
+    required SliderThemeData sliderTheme,
     bool isEnabled = false,
     bool isDiscrete = false,
   }) {

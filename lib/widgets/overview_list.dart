@@ -25,7 +25,7 @@ class OverviewList extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  ActivityProperties.strings[activity],
+                  ActivityProperties.strings[activity]!,
                   style: Theme.of(context).textTheme.bodyText1,
                 ),
               ),
@@ -37,8 +37,8 @@ class OverviewList extends StatelessWidget {
                       text: StringConverter.timeString(trackedTime[activity]),
                       style: TextStyle(
                         color: ActivityProperties.colors[activity],
-                        fontWeight: (trackedTime[activity] >
-                                timeLimits[currentWeekday][activity])
+                        fontWeight: (trackedTime[activity]! >
+                                timeLimits[currentWeekday]![activity]!)
                             ? FontWeight.w800
                             : FontWeight.normal,
                       ),
@@ -48,7 +48,7 @@ class OverviewList extends StatelessWidget {
                     ),
                     TextSpan(
                       text: StringConverter.timeString(
-                          timeLimits[currentWeekday][activity]),
+                          timeLimits[currentWeekday]![activity]),
                     ),
                   ],
                 ),

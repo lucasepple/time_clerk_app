@@ -6,10 +6,10 @@ import 'package:time_clerk_app/screens/stats_screen.dart';
 
 class Picker extends StatefulWidget {
   // improve receiving and hanling of current value
-  String currentValue;
+  String? currentValue;
 
-  Function(String) updatePickedDay;
-  StatsType statsType;
+  Function(String?)? updatePickedDay;
+  StatsType? statsType;
   final String currentMonth = 'February';
   final int currentYear = 2021;
 
@@ -28,9 +28,9 @@ class _PickerState extends State<Picker> {
     List<String> itemList = [];
     if (widget.statsType == StatsType.month) {
       // Better way instead of using Activity.sleep?
-      if (TimeTracker().storedData[Activity.sleep][widget.currentYear] !=
+      if (TimeTracker().storedData[Activity.sleep]![widget.currentYear] !=
           null) {
-        TimeTracker().storedData[Activity.sleep].forEach((year, map) {
+        TimeTracker().storedData[Activity.sleep]!.forEach((year, map) {
           map.forEach((month, map) {
             itemList.add('$month $year');
           });
@@ -41,7 +41,7 @@ class _PickerState extends State<Picker> {
     } else if (widget.statsType == StatsType.year) {
       // Better way instead of using Activity.sleep?
       if (TimeTracker().storedData[Activity.sleep] != null) {
-        TimeTracker().storedData[Activity.sleep].forEach((year, map) {
+        TimeTracker().storedData[Activity.sleep]!.forEach((year, map) {
           itemList.add('$year');
         });
       } else {
@@ -73,7 +73,7 @@ class _PickerState extends State<Picker> {
   @override
   Widget build(BuildContext context) {
     final List<String> dropdownList = _dropdownList();
-    String selectedValue = dropdownList[0];
+    String? selectedValue = dropdownList[0];
     return DropdownButtonHideUnderline(
       child: DropdownButton<String>(
         value: selectedValue,
@@ -96,7 +96,7 @@ class _PickerState extends State<Picker> {
               children: [
                 Text(
                   item,
-                  style: Theme.of(context).textTheme.headline1.copyWith(
+                  style: Theme.of(context).textTheme.headline1!.copyWith(
                         fontSize: 20,
                       ),
                 ),
@@ -113,11 +113,11 @@ class _PickerState extends State<Picker> {
           }).toList();
         },
         underline: null,
-        onChanged: (String newValue) {
+        onChanged: (String? newValue) {
           setState(
             () {
               selectedValue = newValue;
-              if (widget.statsType == null) widget.updatePickedDay(newValue);
+              if (widget.statsType == null) widget.updatePickedDay!(newValue);
             },
           );
         },

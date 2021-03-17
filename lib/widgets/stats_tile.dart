@@ -11,12 +11,12 @@ class StatsTile extends StatelessWidget {
   static const double maxHeightFactor = 0.8;
   // max height = highest label (-1/2 Font Size)
   final double pxPerMin = 0.4;
-  Activity activity;
+  Activity? activity;
   final int year;
-  String month;
+  String? month;
 
   StatsTile({
-    @required this.year,
+    required this.year,
     this.month,
     this.activity,
   });
@@ -172,7 +172,7 @@ class StatsTile extends StatelessWidget {
               RotatedBox(
                 quarterTurns: -1,
                 child: Text(
-                  ActivityProperties.strings[avgActivity],
+                  ActivityProperties.strings[avgActivity]!,
                   style: Theme.of(context).textTheme.bodyText1,
                 ),
               ),
@@ -194,17 +194,17 @@ class StatsTile extends StatelessWidget {
   }
 
   List<Widget> activityChartBarBuilder() {
-    List<num> data = [];
+    List<num?> data = [];
     List<Widget> bars = [];
-    if (TimeTracker().storedData[activity][year] != null) {
+    if (TimeTracker().storedData[activity!]![year] != null) {
       if (month == null) {
-        TimeTracker().storedData[activity][year].forEach(
+        TimeTracker().storedData[activity!]![year]!.forEach(
           (month, daysMap) {
             data.add(TimeTracker().monthlyAvg(year, month, activity));
           },
         );
       } else {
-        TimeTracker().storedData[activity][year][month].forEach(
+        TimeTracker().storedData[activity!]![year]![month]!.forEach(
           (day, minutes) {
             data.add(minutes);
           },
@@ -214,8 +214,8 @@ class StatsTile extends StatelessWidget {
     for (int i = 0; i < data.length; i++) {
       bars.add(Container(
         margin: EdgeInsets.symmetric(horizontal: month != null ? 1.5 : 3.25),
-        color: ActivityProperties.colors[activity],
-        height: data[i] * pxPerMin,
+        color: ActivityProperties.colors[activity!],
+        height: data[i]! * pxPerMin,
         width: month != null ? 6.5 : 18,
       ));
     }
@@ -235,8 +235,8 @@ class StatsTile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Text(
-            activity == null ? 'Average' : ActivityProperties.strings[activity],
-            style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 24),
+            activity == null ? 'Average' : ActivityProperties.strings[activity!]!,
+            style: Theme.of(context).textTheme.headline1!.copyWith(fontSize: 24),
           ),
           chartBuilder(context),
         ],

@@ -6,9 +6,9 @@ import 'package:intl/intl.dart';
 import 'package:time_clerk_app/models/activity.dart';
 
 class TimeTracker {
-  int currentYear;
-  String currentMonth;
-  int currentDay;
+  int? currentYear;
+  String? currentMonth;
+  int? currentDay;
   var currentActivity = Activity.other;
 
   // cutom values for testing
@@ -39,9 +39,9 @@ class TimeTracker {
     Activity.socialMedia: Stopwatch(),
     Activity.other: Stopwatch(),
   };
-  Timer timer;
+  Timer? timer;
   // initted for dev
-  Map<Activity, Map<int, Map<String, Map<int, int>>>> _storedData = {
+  Map<Activity, Map<int?, Map<String?, Map<int?, int?>>>> _storedData = {
     Activity.sleep: {
       2021: {
         'January': {
@@ -123,7 +123,7 @@ class TimeTracker {
     return {..._trackedTime};
   }
 
-  Map<Activity, Map<int, Map<String, Map<int, int>>>> get storedData {
+  Map<Activity, Map<int?, Map<String?, Map<int?, int?>>>> get storedData {
     return {..._storedData};
   }
 
@@ -155,14 +155,14 @@ class TimeTracker {
   }
 
 // combine with yearly Avg
-  double monthlyAvg(int year, String month, Activity activity) {
+  double monthlyAvg(int year, String? month, Activity? activity) {
     double avg = 0;
     int totalTime = 0;
     int amount = 0;
-    if (TimeTracker().storedData[activity][year] != null) {
-      _storedData[activity][year][month].forEach(
+    if (TimeTracker().storedData[activity!]![year] != null) {
+      _storedData[activity]![year]![month]!.forEach(
         (day, minutes) {
-          totalTime += minutes;
+          totalTime += minutes!;
           amount++;
         },
       );
@@ -178,12 +178,12 @@ class TimeTracker {
     double avg = 0;
     int totalTime = 0;
     int amount = 0;
-    if (TimeTracker().storedData[activity][year] != null) {
-      _storedData[activity][year].forEach(
+    if (TimeTracker().storedData[activity]![year] != null) {
+      _storedData[activity]![year]!.forEach(
         (month, daysMap) {
           daysMap.forEach(
             (day, minutes) {
-              totalTime += minutes;
+              totalTime += minutes!;
               amount++;
             },
           );
@@ -197,7 +197,7 @@ class TimeTracker {
   }
 
   void setTimeLimit(String day, Activity activity, int minutes) {
-    _timeLimits[day].update(
+    _timeLimits[day]!.update(
       activity,
       (int _) => minutes,
       ifAbsent: () => minutes,
@@ -217,13 +217,13 @@ class TimeTracker {
 
   Future<void> saveCurrentData() async {
     for (Activity activity in Activity.values) {
-      if (!_storedData[activity].containsKey(currentYear)) {
-        _storedData[activity][currentYear] = {};
+      if (!_storedData[activity]!.containsKey(currentYear)) {
+        _storedData[activity]![currentYear] = {};
       }
-      if (!_storedData[activity][currentYear].containsKey(currentMonth)) {
-        _storedData[activity][currentYear][currentMonth] = {};
+      if (!_storedData[activity]![currentYear]!.containsKey(currentMonth)) {
+        _storedData[activity]![currentYear]![currentMonth] = {};
       }
-      _storedData[activity][currentYear][currentMonth][currentDay] =
+      _storedData[activity]![currentYear]![currentMonth]![currentDay] =
           _trackedTime[activity];
     }
   }
@@ -276,14 +276,14 @@ class TimeTracker {
   void changeCurentActivity(Activity activity) {
     if (currentActivity == Activity.socialMedia ||
         currentActivity == Activity.sport) {
-      stopwatches[Activity.leisure].stop();
+      stopwatches[Activity.leisure]!.stop();
     }
-    stopwatches[currentActivity].stop();
+    stopwatches[currentActivity]!.stop();
 
     if (activity == Activity.socialMedia || activity == Activity.sport) {
-      startStopwatch(stopwatches[Activity.leisure]);
+      startStopwatch(stopwatches[Activity.leisure]!);
     }
-    startStopwatch(stopwatches[activity]);
+    startStopwatch(stopwatches[activity]!);
 
     currentActivity = activity;
   }

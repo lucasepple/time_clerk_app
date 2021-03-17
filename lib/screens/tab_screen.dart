@@ -62,7 +62,7 @@ class _TabScreenState extends State<TabScreen> {
                             ],
                             labelStyle: Theme.of(context)
                                 .textTheme
-                                .bodyText1
+                                .bodyText1!
                                 .copyWith(fontWeight: FontWeight.w600),
                             unselectedLabelStyle:
                                 Theme.of(context).textTheme.bodyText1,

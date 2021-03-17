@@ -28,16 +28,16 @@ class ProfileListTile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  ActivityProperties.strings[activity],
-                  style: Theme.of(context).textTheme.bodyText1.copyWith(
+                  ActivityProperties.strings[activity]!,
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
                         fontSize: 19,
                       ),
                 ),
                 Consumer<TimeLimits>(
                   builder: (ctx, timeLimits, child) => Text(
                     StringConverter.timeString(
-                        timeLimits.limits[selectedWeekday][activity]),
-                    style: Theme.of(context).textTheme.bodyText1.copyWith(
+                        timeLimits.limits[selectedWeekday]![activity]),
+                    style: Theme.of(context).textTheme.bodyText1!.copyWith(
                           color: ActivityProperties.colors[activity],
                           fontSize: 19,
                         ),

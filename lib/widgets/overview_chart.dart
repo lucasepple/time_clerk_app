@@ -16,8 +16,8 @@ class OverviewChart extends StatelessWidget {
   double heightFactor() {
     List<int> times = [];
     for (Activity activity in Activity.values) {
-      times.add(trackedTime[activity]);
-      times.add(timeLimits[currentWeekday][activity]);
+      times.add(trackedTime[activity]!);
+      times.add(timeLimits[currentWeekday]![activity]!);
     }
     final int maxMinutes = times.reduce(max);
     final double factor = (chartHeight - 0.75) / maxMinutes;
@@ -37,13 +37,14 @@ class OverviewChart extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             children: <Widget>[
               Container(
-                height: heightFactor() * trackedTime[activity].toDouble(),
+                height: heightFactor() * trackedTime[activity]!.toDouble(),
                 width: 35,
                 color: ActivityProperties.colors[activity],
               ),
-              if (timeLimits[currentWeekday][activity] != 0)
+              if (timeLimits[currentWeekday]![activity] != 0)
                 Positioned(
-                  bottom: heightFactor() * timeLimits[currentWeekday][activity],
+                  bottom:
+                      heightFactor() * timeLimits[currentWeekday]![activity]!,
                   child: Row(
                     children: <Widget>[
                       Container(
@@ -55,9 +56,9 @@ class OverviewChart extends StatelessWidget {
                         width: 35,
                         height: 0.75,
                         color: heightFactor() *
-                                    timeLimits[currentWeekday][activity] >=
+                                    timeLimits[currentWeekday]![activity]! >=
                                 (heightFactor() *
-                                        trackedTime[activity].toDouble() -
+                                        trackedTime[activity]!.toDouble() -
                                     0.75)
                             ? ActivityProperties.colors[activity]
                             : Colors.white,
