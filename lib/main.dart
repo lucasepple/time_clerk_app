@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:time_clerk_app/providers/button_status.dart';
 
 import 'package:time_clerk_app/providers/time_limits.dart';
 import 'package:time_clerk_app/screens/tab_screen.dart';
@@ -9,8 +10,15 @@ void main() => runApp(TimeClerk());
 class TimeClerk extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (ctx) => TimeLimits(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (ctx) => TimeLimits(),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) => ButtonStatus(),
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Time Clerk',

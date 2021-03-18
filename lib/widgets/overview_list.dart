@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:time_clerk_app/helpers/string_converter.dart';
 
 import 'package:time_clerk_app/models/time_tracker.dart';
 import 'package:time_clerk_app/models/activity.dart';
+import 'package:time_clerk_app/providers/button_status.dart';
 import 'package:time_clerk_app/widgets/tracking_button.dart';
 // import 'package:time_clerk_app/widgets/weekday_picker.dart';
 
@@ -56,7 +58,13 @@ class OverviewList extends StatelessWidget {
               SizedBox(
                 width: 20,
               ),
-              TrackingButton(activity),
+              Consumer<ButtonStatus>(builder: (context, buttonProvider, child) {
+                print(buttonProvider.getButtonStatus(activity));
+                return TrackingButton(
+                  activity,
+                  buttonProvider.getButtonStatus(activity),
+                );
+              }),
             ],
           ),
         ),
